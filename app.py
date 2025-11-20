@@ -302,7 +302,7 @@ st.markdown("""
 # PAGE CONFIGURATION
 # ==========================================================
 st.set_page_config(
-    page_title="Bavis Support AI Assistant",
+    page_title="Bavis Service Advisor",
     page_icon="🤖",
     layout="centered"
 )
@@ -312,7 +312,7 @@ st.set_page_config(
 # ==========================================================
 st.markdown("""
 <div class="header">
-    <h1>Bavis Support AI Assistant</h1>
+    <h1>Bavis Service Advisor</h1>
     <p><b>Helps choose the right drive-thru or teller-lane system for any business.</b></p>
 </div>
 """, unsafe_allow_html=True)
