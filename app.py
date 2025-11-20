@@ -207,9 +207,9 @@ st.markdown("""
         padding: 0 1rem !important;
     }
     /* Hide Streamlit default elements */
-    #MainMenu {visibility: hidden;}
+    /* #MainMenu {visibility: hidden;} */
     footer {visibility: hidden;}
-    header {visibility: hidden;}
+    /* header {visibility: hidden;} */
     
     /* Remove extra spacing from Streamlit containers */
     .stTabs [data-baseweb="tab-panel"] > div > div {
@@ -312,7 +312,7 @@ st.set_page_config(
 # ==========================================================
 st.markdown("""
 <div class="header">
-    <h1>Bavis Service Chatbot</h1>
+    <h1>Bavis Support AI Assistant</h1>
     <p><b>Helps choose the right drive-thru or teller-lane system for any business.</b></p>
 </div>
 """, unsafe_allow_html=True)
@@ -320,7 +320,7 @@ st.markdown("""
 # ==========================================================
 # TAB SELECTION
 # ==========================================================
-tab1, tab2 = st.tabs(["📋 Guided Advisor", "🔍 RAG Assistant"])
+tab1, tab2 = st.tabs(["📋 Product Advisor", "🔍 Support Assistant"])
 
 # ==========================================================
 # TAB 1: GUIDED ADVISOR (Existing System)
@@ -328,7 +328,7 @@ tab1, tab2 = st.tabs(["📋 Guided Advisor", "🔍 RAG Assistant"])
 with tab1:
     st.markdown("""
     <div class="header">
-        <h2>Guided Advisor</h2>
+        <h2>Product Selection Advisor</h2>
         <p><i>Provides guided questions, deterministic recommendations, and datasheets.</i></p>
     </div>
     """, unsafe_allow_html=True)
@@ -398,7 +398,7 @@ with tab1:
     st.markdown("</div>", unsafe_allow_html=True)
     
     # User input field - fixed at bottom
-    st.markdown('<div class="input-wrapper">', unsafe_allow_html=True)
+    #st.markdown('<div class="input-wrapper">', unsafe_allow_html=True)
     if st.session_state.guided_recommendation_ready:
         user_input = st.chat_input("✅ Recommendation provided — type here to revise any answer or ask follow-ups...", key="guided_input")
     else:
@@ -448,8 +448,8 @@ with tab1:
 with tab2:
     st.markdown("""
     <div class="header">
-        <h2>RAG Assistant</h2>
-        <p><i>Ask questions about drive-thru systems.</i></p>
+        <h2>Support Assistant</h2>
+        <p><i>Ask questions about products, services, and support.</i></p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -522,7 +522,7 @@ with tab2:
         st.markdown("</div>", unsafe_allow_html=True)
         
         # User input field - fixed at bottom
-        st.markdown('<div class="input-wrapper">', unsafe_allow_html=True)
+        #st.markdown('<div class="input-wrapper">', unsafe_allow_html=True)
         user_input = st.chat_input("💬 Ask a question about drive-thru systems...", key="rag_input")
         st.markdown("</div>", unsafe_allow_html=True)
         st.markdown("</div>", unsafe_allow_html=True)
