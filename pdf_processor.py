@@ -44,7 +44,7 @@ class PDFProcessor:
                 
                 for page_num, page in enumerate(pdf_reader.pages, start=1):
                     text = page.extract_text()
-                    if text.strip():  # Only add non-empty pages
+                    if text and text.strip():  # Only add non-empty pages
                         pages.append({
                             'text': text,
                             'page': page_num,
@@ -133,12 +133,14 @@ class PDFProcessor:
         Returns:
             Cleaned text
         """
-        # Remove excessive whitespace
-        text = re.sub(r'\s+', ' ', text)
-        # Remove special characters that might interfere
-        text = re.sub(r'\x00', '', text)  # Remove null bytes
-        # Normalize line breaks
+        # Normalize line breaks first so paragraph-aware chunking can use them.
         text = text.replace('\r\n', '\n').replace('\r', '\n')
+        # Remove special characters that might interfere
+        text = re.sub(r'\x00', '', text)
+        # Collapse spaces without flattening paragraph boundaries.
+        text = re.sub(r'[ \t]+', ' ', text)
+        text = re.sub(r' *\n *', '\n', text)
+        text = re.sub(r'\n{3,}', '\n\n', text)
         return text.strip()
     
     def process_pdf(self, pdf_path: str) -> List[Dict[str, Any]]:
@@ -187,7 +189,7 @@ class PDFProcessor:
             List of all chunks from all PDFs
         """
         pdf_dir = Path(pdf_directory)
-        pdf_files = list(pdf_dir.glob("*.pdf"))
+        pdf_files = sorted(pdf_dir.glob("*.pdf"))
         
         if not pdf_files:
             raise ValueError(f"No PDF files found in {pdf_directory}")
